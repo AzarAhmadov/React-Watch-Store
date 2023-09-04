@@ -61,7 +61,7 @@ const FavoritesProdcuts = () => {
                                                 {el.price}$
                                             </Card.Text>
                                             <div className='mt-2 d-flex'>
-                                                <Link to={`/Products/${el.name}`} className='text-body preview'>Preview</Link>
+                                                <Link to={`/Products/${el.title}`} className='text-body preview'>Preview</Link>
                                                 <div onClick={notifyAdd}>
                                                     <Button onClick={() => dispatch(addToBasket(el))} className='ms-3' variant="dark"> Add to cart </Button>
                                                 </div>
