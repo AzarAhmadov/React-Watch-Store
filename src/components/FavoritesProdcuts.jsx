@@ -28,7 +28,7 @@ const FavoritesProdcuts = () => {
     const favorites = useSelector((state) => state.product.favorites);
 
     const notifyWarning = () => {
-        toast.error("Deleted to favorites", {
+        toast.error("Removed to favorites", {
             position: toast.POSITION.TOP_RIGHT
         });
     }

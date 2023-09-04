@@ -46,7 +46,7 @@ const ProductList = () => {
     }
 
     const notifyWarning = () => {
-        toast.error("Remove to favorites", {
+        toast.error("Removed to favorites", {
             position: toast.POSITION.TOP_RIGHT
         });
     }
