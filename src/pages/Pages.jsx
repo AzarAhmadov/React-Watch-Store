@@ -10,7 +10,8 @@ import ProductDetail from './ProductDetail'
 import FavoritesProdcuts from '../components/FavoritesProdcuts'
 import { ShoppingCart } from '../components/ShoppingCart'
 import Filter from '../components/Filter'
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
+import About from './About'
 
 const transition = {
     duration: 1,
@@ -20,7 +21,7 @@ const transition = {
 const animationVariants = {
     initial: {
         opacity: 0,
-        x: -5,
+        x: -10,
     },
     animate: {
         opacity: 1,
@@ -125,6 +126,15 @@ const Pages = () => {
                         <>
                             <Breadcrumb />
                             <FavoritesProdcuts />
+                        </>
+                    }>
+                    </AnimatedRoute>
+                } />
+                <Route path="/About" element={
+                    <AnimatedRoute element={
+                        <>
+                            <Breadcrumb />
+                            <About />
                         </>
                     }>
                     </AnimatedRoute>

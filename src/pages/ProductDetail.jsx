@@ -1,15 +1,18 @@
-import React, { useEffect } from 'react'
-import ProductDetails from '../components/ProductDetails'
+import React, { lazy, Suspense, useEffect } from 'react'
+const ProductDetails = lazy(() => import('../components/ProductDetails'));
+import Loading from '../layout/Loading';
 
 const ProductDetail = () => {
-    
+
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
 
     return (
         <main>
-            <ProductDetails />
+            <Suspense fallback={<Loading />}>
+                <ProductDetails />
+            </Suspense>
         </main>
     )
 }

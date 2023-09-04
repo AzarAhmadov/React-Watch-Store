@@ -46,7 +46,7 @@ const ProductList = () => {
     }
 
     const notifyWarning = () => {
-        toast.error("Deleted to favorites", {
+        toast.error("Remove to favorites", {
             position: toast.POSITION.TOP_RIGHT
         });
     }
@@ -64,7 +64,7 @@ const ProductList = () => {
                         filteredProducts.map((el, idx) => (
                             <Col className='mt-3 g-3' key={idx} lg={6} xl={3}>
                                 <Card className='cards'>
-                                    <Card.Img className='img-top img-fluid' variant="top" src={el.img} />
+                                    <Card.Img loading='lazy' className='img-top img-fluid' variant="top" src={el.img} />
                                     <Card.Body>
                                         <Card.Title>{el.title}</Card.Title>
                                         <Card.Text className='fs-5'>

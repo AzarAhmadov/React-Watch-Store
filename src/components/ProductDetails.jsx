@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 import { product_list } from '../assets/data/data';
 import { useLocation } from 'react-router-dom';
-import ImageZoom from "react-image-zooom";
 import { useToggle } from '../hooks/useToggle';
 import { toast, ToastContainer } from 'react-toastify';
 import { addToBasket } from '../app/features/basket/getBasket';
@@ -35,11 +34,11 @@ const ProductDetails = () => {
             <Container>
                 <Row>
                     <Col xl={5}>
-                        <ImageZoom
+                        <img
                             src={selectedImage}
+                            loading='lazy'
                             alt={filteredProduct.title}
-                            zoom="300"
-                            className='product-img'
+                            id='imageZoom'
                         />
                         <ul>
                             {filteredProduct.additionalImages.map((image, index) => (
@@ -47,6 +46,7 @@ const ProductDetails = () => {
                                     <img
                                         src={image}
                                         alt={filteredProduct.title}
+                                        loading='lazy'
                                         onClick={() => handleImageClick(image)}
                                         className='product-img'
                                     />

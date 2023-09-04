@@ -86,7 +86,7 @@ export const ShoppingCart = () => {
                                 Total
                             </li>
                             <li>
-                                {totalPrice}
+                                {totalPrice}$
                             </li>
                         </ul>
                         <button className='btn btn-dark'> Proceed to Checkout </button>

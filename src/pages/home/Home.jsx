@@ -1,10 +1,13 @@
-import React from 'react'
-import WatchList from './WatchList'
+import React, { lazy, Suspense } from 'react';
+const WatchList = lazy(() => import('./WatchList'));
+import Loading from '../../layout/Loading';
 
 export const Home = () => {
     return (
         <main>
-            <WatchList />
+            <Suspense fallback={<Loading />}>
+                <WatchList />
+            </Suspense>
         </main>
     )
 }
