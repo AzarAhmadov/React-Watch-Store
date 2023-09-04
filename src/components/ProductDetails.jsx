@@ -62,7 +62,7 @@ const ProductDetails = () => {
                             </span>
                             <div className="quantity">
                                 <span>Quantity</span>
-                                <Form.Control value='1' />
+                                <Form.Control defaultValue='1' readOnly />
                                 <div onClick={notifyAdd}>
                                     <Button onClick={() => dispatch(addToBasket(filteredProduct))} className='w-100' variant='dark' type="button"> Add to cart </Button>
                                 </div>

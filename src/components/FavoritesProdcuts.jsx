@@ -44,7 +44,7 @@ const FavoritesProdcuts = () => {
                                     <Card className='cards'>
                                         <Card.Img className='img-top img-fluid' variant="top" src={el.img} />
                                         <Card.Body>
-                                            <Card.Title>{el.title}</Card.Title>
+                                            <Card.Title>{el.name}</Card.Title>
                                             <Card.Text className='fs-5'>
                                                 {el.price}$
                                             </Card.Text>

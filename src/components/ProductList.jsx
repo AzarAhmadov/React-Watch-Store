@@ -55,7 +55,6 @@ const ProductList = () => {
         window.scrollTo(0, 0);
     }, []);
 
-
     return (
         <section id='product-list'>
             <Container>
@@ -64,7 +63,7 @@ const ProductList = () => {
                         filteredProducts.map((el, idx) => (
                             <Col className='mt-3 g-3' key={idx} lg={6} xl={3}>
                                 <Card className='cards'>
-                                    <Card.Img loading='lazy' className='img-top img-fluid' variant="top" src={el.img} />
+                                    <Card.Img loading='lazy' className='img-top img-fluid' variant="top" alt={el.title} src={el.img} />
                                     <Card.Body>
                                         <Card.Title>{el.title}</Card.Title>
                                         <Card.Text className='fs-5'>
