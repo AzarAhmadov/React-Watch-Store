@@ -22,7 +22,7 @@ const getFavorite = createSlice({
             } else {
                 state.selectedProduct.push({
                     id: action.payload.id,
-                    name: action.payload.title,
+                    title: action.payload.title,
                     price: action.payload.price,
                     img: action.payload.img,
                 });

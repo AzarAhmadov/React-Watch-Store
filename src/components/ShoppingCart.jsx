@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggle } from '../app/features/Cart/getCart';
@@ -13,7 +13,6 @@ export const ShoppingCart = () => {
     }
 
     const basket = useSelector((state) => state.basket.items);
-
     const totalPrice = basket.reduce((total, item) => total + item.price * item.quantity, 0);
 
     return (

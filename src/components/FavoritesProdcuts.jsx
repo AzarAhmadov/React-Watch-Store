@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button, Card, Col, Container, Row } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { toggleFavorite, setSelectedProduct } from '../app/features/favorite/getFavorite';
 import { toast, ToastContainer } from 'react-toastify';
+import { addToBasket } from '../app/features/basket/getBasket';
 
 const NoFavorite = () => {
 
@@ -33,6 +34,17 @@ const FavoritesProdcuts = () => {
         });
     }
 
+    const notifyAdd = () => {
+        toast.success("Added to cart", {
+            position: toast.POSITION.TOP_RIGHT
+        });
+    }
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
+
     return (
         <>
             <section id='favorites'>
@@ -44,13 +56,15 @@ const FavoritesProdcuts = () => {
                                     <Card className='cards'>
                                         <Card.Img className='img-top img-fluid' variant="top" src={el.img} />
                                         <Card.Body>
-                                            <Card.Title>{el.name}</Card.Title>
+                                            <Card.Title>{el.title}</Card.Title>
                                             <Card.Text className='fs-5'>
                                                 {el.price}$
                                             </Card.Text>
                                             <div className='mt-2 d-flex'>
                                                 <Link to={`/Products/${el.name}`} className='text-body preview'>Preview</Link>
-                                                <Button className='ms-3' variant="dark"> Add to cart </Button>
+                                                <div onClick={notifyAdd}>
+                                                    <Button onClick={() => dispatch(addToBasket(el))} className='ms-3' variant="dark"> Add to cart </Button>
+                                                </div>
                                             </div>
                                         </Card.Body>
 

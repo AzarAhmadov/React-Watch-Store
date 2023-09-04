@@ -28,6 +28,7 @@ body {
     overflow-x: hidden;
 }
 
+
 ::-webkit-scrollbar {
     width: 4px;
 }
@@ -62,7 +63,7 @@ body {
 
             & a {
                 color: var(--color-2);
-                font-size: 24px;
+                font-size: 23px;
                 display: flex;
                 justify-content: center;
                 align-items: center;
@@ -412,7 +413,8 @@ body {
             height: 25px;
             cursor: pointer;
             fill: var(--color-1);
-            &:hover{
+
+            &:hover {
                 transform: scale(1.1);
             }
         }
@@ -476,7 +478,7 @@ body {
     }
 }
 
-.Toastify__toast-container{
+.Toastify__toast-container {
     margin-top: 70px;
 }
 
@@ -498,11 +500,12 @@ body {
             height: 25px;
             cursor: pointer;
             fill: var(--color-1);
-            &:hover{
+
+            &:hover {
                 transform: scale(1.1);
             }
         }
-    }   
+    }
 
     .product-img {
         width: 100%;
@@ -553,6 +556,10 @@ body {
             display: block;
             font-weight: 500;
             color: var(--color-selected);
+        }
+
+        .dec-btn {
+            color: var(--color-2);
         }
 
         .decs {
@@ -1074,7 +1081,7 @@ footer {
                 }
 
                 & a {
-                    font-size: 20px;
+                    font-size: 21px;
 
                     & svg {
                         width: 15px;
