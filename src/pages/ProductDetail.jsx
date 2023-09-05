@@ -1,5 +1,5 @@
 import React, { lazy, Suspense, useEffect } from 'react'
-const ProductDetails = lazy(() => import('../components/ProductDetails'));
+const  ProductDetails = lazy(() => import('../components/ProductDetails'));
 import Loading from '../layout/Loading';
 
 const ProductDetail = () => {

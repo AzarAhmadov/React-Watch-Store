@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from 'react';
+import React, { useEffect } from 'react';
 import { Button, Card, Col, Container, Row } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -44,7 +44,6 @@ const FavoritesProdcuts = () => {
         window.scrollTo(0, 0);
     }, []);
 
-    console.log(selectedProduct)
     return (
         <>
             <section id='favorites'>

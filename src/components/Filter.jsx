@@ -1,4 +1,3 @@
-// src/components/Filter.js
 import React from 'react';
 import { Container, Form } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
