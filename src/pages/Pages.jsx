@@ -12,6 +12,7 @@ import { ShoppingCart } from '../components/ShoppingCart'
 import Filter from '../components/Filter'
 import { motion } from 'framer-motion';
 import About from './About'
+import UpBtn from '../components/UpBtn'
 
 const transition = {
     duration: 1,
@@ -55,6 +56,7 @@ const Pages = () => {
         <BrowserRouter>
             <Header />
             <ShoppingCart />
+            <UpBtn/>
             <Routes>
                 <Route path="/" element={
                     <AnimatedRoute element={

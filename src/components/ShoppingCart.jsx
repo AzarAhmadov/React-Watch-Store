@@ -3,6 +3,7 @@ import { Button, Form } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggle } from '../app/features/Cart/getCart';
 import { removeFromBasket, addToBasket, updateQuantity } from '../app/features/basket/getBasket';
+import { Link } from 'react-router-dom';
 
 export const ShoppingCart = () => {
     const isOpen = useSelector((state) => state.toggle.isOpen);
@@ -32,16 +33,18 @@ export const ShoppingCart = () => {
                                     <li>
                                         <div className='left'>
                                             <div>
-                                                <img src={el.img?.url} alt={el.name} />
+                                                <Link onClick={closeMenu} to={`/Products/${el.path}`}>
+                                                    <img src={el.img?.url} alt={el.name} />
+                                                </Link>
                                             </div>
                                             <div className='detail'>
-                                                <span className="title">
+                                                <Link onClick={closeMenu} className='title' to={`/Products/${el.path}`}>
                                                     {el.title}
-                                                </span>
+                                                </Link>
                                                 <span className="prices">
                                                     {el.price}$
                                                 </span>
-                                                <Button onClick={() => dispatch(removeFromBasket(el))} variant="outline-danger" style={{width:'max-content'}} className='btn pt-1 pb-1'> remove </Button>
+                                                <Button onClick={() => dispatch(removeFromBasket(el))} variant="outline-danger" style={{ width: 'max-content' }} className='btn pt-1 pb-1'> remove </Button>
                                             </div>
                                         </div>
                                         <div className='d-flex align-items-center justify-content-end'>

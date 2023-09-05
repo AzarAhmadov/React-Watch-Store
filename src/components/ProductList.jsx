@@ -17,7 +17,7 @@ const ProductList = () => {
     const pathParts = location.pathname.slice(1).split('/');
     const [products, setProducts] = useState([]);
     const [visibleProducts, setVisibleProducts] = useState(products.slice(0, 8));
-    const [currentPage, setCurrentPage] = useState(1);
+    const [currentPage] = useState(1);
     const productsPerPage = 8;
 
     useEffect(() => {
@@ -71,9 +71,9 @@ const ProductList = () => {
     }
 
     if (selectedFilter === 'lowToHigh') {
-        filteredProducts.sort((a, b) => a.price - b.price);
+        visibleProducts.sort((a, b) => a.price - b.price);
     } else if (selectedFilter === 'highToLow') {
-        filteredProducts.sort((a, b) => b.price - a.price);
+        visibleProducts.sort((a, b) => b.price - a.price);
     }
 
     const notifySuccess = () => {
@@ -98,12 +98,18 @@ const ProductList = () => {
         const startIndex = (currentPage - 1) * productsPerPage;
         const endIndex = startIndex + productsPerPage;
         const visible = filteredProducts.slice(startIndex, endIndex);
-        setVisibleProducts(visible);
+
+        setVisibleProducts((prevVisibleProducts) => {
+            if (JSON.stringify(prevVisibleProducts) !== JSON.stringify(visible)) {
+                return visible;
+            }
+            return prevVisibleProducts;
+        });
     }, [currentPage, filteredProducts]);
 
     const handleLoadMoreClick = () => {
         const currentlyVisible = visibleProducts.length;
-        const nextBatch = currentlyVisible + 2;
+        const nextBatch = currentlyVisible + 8;
         setVisibleProducts(products.slice(0, nextBatch));
     };
 
@@ -113,7 +119,7 @@ const ProductList = () => {
                 <Row>
                     {
                         visibleProducts.map((el, idx) => (
-                            <Col className='mt-3 g-3' key={idx} lg={6} xl={3}>
+                            <Col className='mt-3 g-3' key={idx} sm={6} lg={6} xl={3}>
                                 <Card className='cards'>
                                     <Card.Img loading='lazy' className='img-top img-fluid' variant="top" alt={el.title} src={el.img.url} />
                                     <Card.Body>
@@ -153,10 +159,13 @@ const ProductList = () => {
                         ))
                     }
                     <div className='mt-2 mb-2'>
-                        {visibleProducts.length < products.length && (
+                        {visibleProducts.length < products.length && visibleProducts.length >= productsPerPage && (
                             <div className="text-center mt-3 mb-3">
-                                <Button className='d-flex align-items-center justify-content-center m-auto' onClick={handleLoadMoreClick} variant="outline-dark">Load More
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill='#000' className='ms-2' height="1em" viewBox="0 0 512 512"><path d="M304 48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zm0 416a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM48 304a48 48 0 1 0 0-96 48 48 0 1 0 0 96zm464-48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM142.9 437A48 48 0 1 0 75 369.1 48 48 0 1 0 142.9 437zm0-294.2A48 48 0 1 0 75 75a48 48 0 1 0 67.9 67.9zM369.1 437A48 48 0 1 0 437 369.1 48 48 0 1 0 369.1 437z" /></svg>
+                                <Button className='d-flex align-items-center justify-content-center m-auto' onClick={handleLoadMoreClick} variant="outline-dark">
+                                    Load More
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill='#000' className='ms-2' height="1em" viewBox="0 0 512 512">
+                                        <path d="M304 48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zm0 416a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM48 304a48 48 0 1 0 0-96 48 48 0 1 0 0 96zm464-48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM142.9 437A48 48 0 1 0 75 369.1 48 48 0 1 0 142.9 437zm0-294.2A48 48 0 1 0 75 75a48 48 0 1 0 67.9 67.9zM369.1 437A48 48 0 1 0 437 369.1 48 48 0 1 0 369.1 437z" />
+                                    </svg>
                                 </Button>
                             </div>
                         )}
