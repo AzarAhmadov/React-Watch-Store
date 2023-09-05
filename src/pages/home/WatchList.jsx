@@ -23,7 +23,7 @@ const WatchList = () => {
                             <Link to='/Mens-watches'>
                                 <div className="man">
                                     <span>Men's watches</span>
-                                    <button> Show now </button>
+                                    <button> Shop now </button>
                                 </div>
                             </Link>
                         </div>
@@ -33,7 +33,7 @@ const WatchList = () => {
                             <Link to='/Womens-watches'>
                                 <div className="women">
                                     <span>Women's watches</span>
-                                    <button> Show now </button>
+                                    <button> Shop now </button>
                                 </div>
                             </Link>
                         </div>
@@ -43,7 +43,7 @@ const WatchList = () => {
                             <Link to='/Kids-watches'>
                                 <div className="kids">
                                     <span>Kid's watches</span>
-                                    <button> Show now </button>
+                                    <button> Shop now </button>
                                 </div>
                             </Link>
                         </div>
