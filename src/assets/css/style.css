@@ -988,6 +988,49 @@ body {
     }
 }
 
+.loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10000;
+    background: var(--color-1);
+}
+
+.loader {
+    width: 48px;
+    height: 48px;
+    border: 2px solid #FFF;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+}
+
+.loader::after {
+    content: '';
+    box-sizing: border-box;
+    position: absolute;
+    left: 50%;
+    top: 0;
+    background: #FF3D00;
+    width: 3px;
+    height: 24px;
+    transform: translateX(-50%);
+}
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
 footer {
     width: 100%;
     display: flex;
@@ -1031,19 +1074,19 @@ footer {
     z-index: 100;
 
     &:hover {
-      transform: translateY(-20px);
+        transform: translateY(-20px);
     }
 
-   & svg {
-      font-size: 25px;
-      fill: var(--color-1);
+    & svg {
+        font-size: 25px;
+        fill: var(--color-1);
     }
 
     &.active {
-      bottom: 50px;
-      opacity: 1;
+        bottom: 50px;
+        opacity: 1;
     }
-  }
+}
 
 @media only screen and (max-width:992px) {
     .mobile-menu {
@@ -1182,6 +1225,7 @@ footer {
                         .detail {
                             width: 100px;
                             padding-left: 10px;
+
                             .title {
                                 font-size: 15px;
                                 font-weight: 500;
