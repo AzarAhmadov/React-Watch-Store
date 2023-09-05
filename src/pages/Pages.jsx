@@ -13,6 +13,7 @@ import Filter from '../components/Filter'
 import { motion } from 'framer-motion';
 import About from './About'
 import UpBtn from '../components/UpBtn'
+import NotFound from '../layout/NotFound'
 
 const transition = {
     duration: 1,
@@ -141,7 +142,7 @@ const Pages = () => {
                     }>
                     </AnimatedRoute>
                 } />
-                <Route path="*" element={<>Sehife tapilmadi</>} />
+                <Route path="*" element={<NotFound/>} />
             </Routes>
             <Footer />
         </BrowserRouter>
