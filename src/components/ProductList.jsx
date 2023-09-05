@@ -1,13 +1,13 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import { product_list } from '../assets/data/data';
 import { Link, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleFavorite, setSelectedProduct } from '../app/features/favorite/getFavorite';
 import { addToBasket } from '../app/features/basket/getBasket';
 import { toast, ToastContainer } from 'react-toastify';
+import { GraphQLClient, gql } from 'graphql-request';
 
 const ProductList = () => {
     const dispatch = useDispatch();
@@ -15,10 +15,53 @@ const ProductList = () => {
     const selectedFilter = useSelector((state) => state.sort.sortBy);
     const location = useLocation();
     const pathParts = location.pathname.slice(1).split('/');
-    let filteredProducts = product_list;
+    const [products, setProducts] = useState([]);
+    const [visibleProducts, setVisibleProducts] = useState(products.slice(0, 8));
+    const [currentPage, setCurrentPage] = useState(1);
+    const productsPerPage = 8;
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const data = await graphcms.request(QUERY);
+                setProducts(data.products);
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        };
+
+        fetchData();
+    }, []);
+
+    let filteredProducts = products;
+    const graphcms = new GraphQLClient('https://api-us-west-2.hygraph.com/v2/cljesksx20jv901un4i94aw4y/master');
+
+    const QUERY = gql`
+    {
+    products {
+        title,
+        id,
+        price,
+        category,
+        description,
+        path,
+        img {
+          id,
+          url
+        },
+        additionalImages {
+          id
+          image {
+            id,
+            url
+          }
+        }
+      } 
+    }
+    `;
 
     if (pathParts.length === 1 && pathParts[0] === 'Products') {
-        filteredProducts = product_list;
+        filteredProducts = products;
     } else {
         pathParts.forEach((category) => {
             if (category) {
@@ -46,31 +89,40 @@ const ProductList = () => {
     }
 
     const notifyWarning = () => {
-        toast.error("Removed to favorites", {
+        toast.error("Removed from favorites", {
             position: toast.POSITION.TOP_RIGHT
         });
     }
 
     useEffect(() => {
-        window.scrollTo(0, 0);
-    }, []);
+        const startIndex = (currentPage - 1) * productsPerPage;
+        const endIndex = startIndex + productsPerPage;
+        const visible = filteredProducts.slice(startIndex, endIndex);
+        setVisibleProducts(visible);
+    }, [currentPage, filteredProducts]);
+
+    const handleLoadMoreClick = () => {
+        const currentlyVisible = visibleProducts.length;
+        const nextBatch = currentlyVisible + 2;
+        setVisibleProducts(products.slice(0, nextBatch));
+    };
 
     return (
         <section id='product-list'>
             <Container>
                 <Row>
                     {
-                        filteredProducts.map((el, idx) => (
+                        visibleProducts.map((el, idx) => (
                             <Col className='mt-3 g-3' key={idx} lg={6} xl={3}>
                                 <Card className='cards'>
-                                    <Card.Img loading='lazy' className='img-top img-fluid' variant="top" alt={el.title} src={el.img} />
+                                    <Card.Img loading='lazy' className='img-top img-fluid' variant="top" alt={el.title} src={el.img.url} />
                                     <Card.Body>
                                         <Card.Title>{el.title}</Card.Title>
                                         <Card.Text className='fs-5'>
                                             {el.price}$
                                         </Card.Text>
                                         <div className='mt-2 d-flex'>
-                                            <Link to={`/Products/${el.title}`} className='text-body preview'>Preview</Link>
+                                            <Link to={`/Products/${el.path}`} className='text-body preview'>Preview</Link>
                                             <div onClick={notifyAdd}>
                                                 <Button onClick={() => dispatch(addToBasket(el))} className='ms-3' variant="dark"> Add to cart </Button>
                                             </div>
@@ -100,6 +152,15 @@ const ProductList = () => {
                             </Col>
                         ))
                     }
+                    <div className='mt-2 mb-2'>
+                        {visibleProducts.length < products.length && (
+                            <div className="text-center mt-3 mb-3">
+                                <Button className='d-flex align-items-center justify-content-center m-auto' onClick={handleLoadMoreClick} variant="outline-dark">Load More
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill='#000' className='ms-2' height="1em" viewBox="0 0 512 512"><path d="M304 48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zm0 416a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM48 304a48 48 0 1 0 0-96 48 48 0 1 0 0 96zm464-48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM142.9 437A48 48 0 1 0 75 369.1 48 48 0 1 0 142.9 437zm0-294.2A48 48 0 1 0 75 75a48 48 0 1 0 67.9 67.9zM369.1 437A48 48 0 1 0 437 369.1 48 48 0 1 0 369.1 437z" /></svg>
+                                </Button>
+                            </div>
+                        )}
+                    </div>
                 </Row>
             </Container>
             <ToastContainer />

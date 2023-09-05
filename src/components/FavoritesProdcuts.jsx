@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect,useState } from 'react';
 import { Button, Card, Col, Container, Row } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -44,7 +44,7 @@ const FavoritesProdcuts = () => {
         window.scrollTo(0, 0);
     }, []);
 
-
+    console.log(selectedProduct)
     return (
         <>
             <section id='favorites'>
@@ -54,14 +54,14 @@ const FavoritesProdcuts = () => {
                             selectedProduct.map((el, idx) => (
                                 <Col className='mt-3 g-3' key={idx} xl={3}>
                                     <Card className='cards'>
-                                        <Card.Img className='img-top img-fluid' variant="top" src={el.img} />
+                                        <Card.Img className='img-top img-fluid' variant="top" src={el.img.url} />
                                         <Card.Body>
                                             <Card.Title>{el.title}</Card.Title>
                                             <Card.Text className='fs-5'>
                                                 {el.price}$
                                             </Card.Text>
                                             <div className='mt-2 d-flex'>
-                                                <Link to={`/Products/${el.title}`} className='text-body preview'>Preview</Link>
+                                                <Link to={`/Products/${el.path}`} className='text-body preview'>Preview</Link>
                                                 <div onClick={notifyAdd}>
                                                     <Button onClick={() => dispatch(addToBasket(el))} className='ms-3' variant="dark"> Add to cart </Button>
                                                 </div>

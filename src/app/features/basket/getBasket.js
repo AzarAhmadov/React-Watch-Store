@@ -2,7 +2,9 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const getBasketFromLocalStorage = () => {
   const basketData = localStorage.getItem('basket');
-  return basketData ? JSON.parse(basketData) : { items: [] };
+  return basketData ? JSON.parse(basketData) : {
+    items: []
+  };
 };
 
 const basketSlice = createSlice({
@@ -10,16 +12,22 @@ const basketSlice = createSlice({
   initialState: getBasketFromLocalStorage(),
   reducers: {
     addToBasket: (state, action) => {
-      const existingItem = state.items.find(item => item.id === action.payload.id);
-      if (existingItem) {
-        existingItem.quantity += 1;
+      const { id } = action.payload;
+      const existingItemIndex = state.items.findIndex(item => item.id === id);
+
+      if (existingItemIndex !== -1) {
+        state.items[existingItemIndex].quantity += 1;
       } else {
         state.items.push({ ...action.payload, quantity: 1 });
       }
+
       localStorage.setItem('basket', JSON.stringify(state));
     },
+
     removeFromBasket: (state, action) => {
-      state.items = state.items.filter(item => item.id !== action.payload.id);
+      const { id } = action.payload;
+      const updatedItems = state.items.filter(item => item.id !== id);
+      state.items = updatedItems;
       localStorage.setItem('basket', JSON.stringify(state));
     },
     updateQuantity: (state, action) => {
@@ -27,7 +35,10 @@ const basketSlice = createSlice({
       const product = state.items.find(item => item.id === id);
       if (product) {
         product.quantity = quantity;
-        localStorage.setItem('basket', JSON.stringify(state));
+        const newBasket = {
+          ...state
+        };
+        localStorage.setItem('basket', JSON.stringify(newBasket));
       }
     },
   },

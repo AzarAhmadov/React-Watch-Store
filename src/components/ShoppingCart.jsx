@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggle } from '../app/features/Cart/getCart';
@@ -32,7 +32,7 @@ export const ShoppingCart = () => {
                                     <li>
                                         <div className='left'>
                                             <div>
-                                                <img src={el.img} alt={el.name} />
+                                                <img src={el.img?.url} alt={el.name} />
                                             </div>
                                             <div className='detail'>
                                                 <span className="title">
@@ -41,7 +41,7 @@ export const ShoppingCart = () => {
                                                 <span className="prices">
                                                     {el.price}$
                                                 </span>
-                                                <Button onClick={() => dispatch(removeFromBasket(el))} variant="outline-danger" className='btn pt-1 pb-1'> remove </Button>
+                                                <Button onClick={() => dispatch(removeFromBasket(el))} variant="outline-danger" style={{width:'max-content'}} className='btn pt-1 pb-1'> remove </Button>
                                             </div>
                                         </div>
                                         <div className='d-flex align-items-center justify-content-end'>
@@ -53,12 +53,13 @@ export const ShoppingCart = () => {
                                                 +
                                             </Button>
                                             <Form.Control
-                                                onChange={(e) => dispatch(updateQuantity(el))}
+                                                onChange={(e) => dispatch(updateQuantity({ id: el.id, quantity: parseInt(e.target.value) }))}
                                                 className="w-25 ms-1 me-1 pt-1 pb-1"
                                                 type="number"
                                                 value={el.quantity}
                                                 min={1}
                                             />
+
                                             <Button
                                                 onClick={() => {
                                                     if (el.quantity > 1) {

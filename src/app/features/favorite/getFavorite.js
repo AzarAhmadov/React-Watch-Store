@@ -41,6 +41,7 @@ const favoriteSlice = createSlice({
           title: action.payload.title,
           price: action.payload.price,
           img: action.payload.img,
+          path:action.payload.path,
         });
       }
       saveSelectedProductToLocalStorage(state.selectedProduct);

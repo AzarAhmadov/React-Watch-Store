@@ -388,10 +388,6 @@ body {
     }
 }
 
-#product-list {
-    padding-bottom: 20px;
-}
-
 .cards {
     position: relative;
 
@@ -957,7 +953,7 @@ body {
 
         & li {
             width: 50px;
-            height: 50px;
+            height: 50  px;
             display: grid;
             place-items: center;
             background: #283747;
