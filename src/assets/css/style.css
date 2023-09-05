@@ -669,9 +669,9 @@ body {
         }
 
         & img {
-            width: 100px;
-            height: 120px;
-            object-fit: cover;
+            width: 85px;
+            height: 85px;
+            object-fit: contain;
         }
 
         .cart-area {
@@ -1181,9 +1181,10 @@ footer {
 
                         .detail {
                             width: 100px;
-                            padding-left: 0;
+                            padding-left: 10px;
                             .title {
                                 font-size: 15px;
+                                font-weight: 500;
                             }
                         }
                     }
