@@ -107,14 +107,13 @@ const ProductDetails = () => {
 
                         </div>
                         <ul>
-                            {filteredProduct?.additionalImages.map((image, index) => (
+                            {filteredProduct?.additionalImages?.map((image, index) => (
                                 <li
                                     key={index}
                                 >
                                     <img
                                         src={image?.image.url}
                                         alt={filteredProduct?.title}
-                                        loading='lazy'
                                         onClick={() => handleImageClick(image?.image.url)}
                                         className='product-img'
                                     />
