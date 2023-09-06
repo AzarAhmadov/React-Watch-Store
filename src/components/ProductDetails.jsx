@@ -113,7 +113,7 @@ const ProductDetails = () => {
                                 >
                                     <img
                                         src={image?.image.url}
-                                        alt={filteredProduct?.title}
+                                        alt={image?.title}
                                         onClick={() => handleImageClick(image?.image.url)}
                                         className='product-img'
                                     />
