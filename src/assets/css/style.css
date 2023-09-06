@@ -529,17 +529,15 @@ body {
     }
 
     & ul {
+        gap: 15px;
         display: flex;
-        gap: 20px;
-        width: max-content;
-        margin: 15px auto 0;
+        justify-content: center;
+        margin-top: 15px;
 
         & li {
             width: 100%;
             border: 1px solid rgba(0, 0, 0, 0.1);
             border-radius: 5px;
-            width: max-content;
-            margin: 0 auto;
             padding: 5px 10px;
 
             & img {
