@@ -107,18 +107,20 @@ const ProductDetails = () => {
 
                         </div>
                         <ul>
-                            {filteredProduct?.additionalImages?.map((image, index) => (
-                                <li
-                                    key={index}
-                                >
-                                    <img
-                                        src={image?.image.url}
-                                        alt={image?.title}
-                                        onClick={() => handleImageClick(image?.image.url)}
-                                        className='product-img'
-                                    />
-                                </li>
-                            ))}
+                            {filteredProduct && filteredProduct.additionalImages && (
+                                <ul>
+                                    {filteredProduct.additionalImages.map((image, index) => (
+                                        <li key={index}>
+                                            <img
+                                                src={image?.image?.url}
+                                                alt={image?.title}
+                                                onClick={() => handleImageClick(image?.image?.url)}
+                                                className='product-img'
+                                            />
+                                        </li>
+                                    ))}
+                                </ul>
+                            )}
                         </ul>
                     </Col>
                     <Col xl={7}>
