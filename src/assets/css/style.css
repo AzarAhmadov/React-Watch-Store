@@ -63,7 +63,7 @@ body {
 
             & a {
                 color: var(--color-2);
-                font-size: 23px;
+                font-size: 26px;
                 display: flex;
                 justify-content: center;
                 align-items: center;
@@ -86,7 +86,7 @@ body {
                 align-items: center;
 
                 .list-item {
-                    font-size: 23px;
+                    font-size: 22px;
                     position: relative;
 
                     .list-link {
@@ -1097,6 +1097,13 @@ footer {
 
     #header {
         padding: 15px 0;
+
+        .logo {
+
+            & a {
+                font-size: 22px !important;
+            }
+        }
 
         .nav {
             & ul {
