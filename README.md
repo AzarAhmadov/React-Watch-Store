@@ -1,5 +1,5 @@
 ### Watch store
-Watch sales website
+This is a Full Stack " Watch Sales Website "
 
 ## Demo
 Live demo : https://react-watch-store.vercel.app/
